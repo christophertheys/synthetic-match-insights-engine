@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "insight_fact.schema.json",
+  "title": "InsightFact",
+  "description": "A structured, timestamped, language-free insight. The only thing the narrator and overlay layers are allowed to consume.",
+  "type": "object",
+  "required": ["fact_id", "match_id", "t", "kind", "importance", "subject", "metrics", "why", "evidence"],
+  "properties": {
+    "fact_id": { "type": "string" },
+    "match_id": { "type": "string" },
+    "t": { "type": "number", "description": "Match clock seconds when the fact became true" },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "goal", "big_chance", "win_prob_swing", "control_chaos_shift", "pressing_shift",
+        "pass_of_note", "shot_speed", "sprint", "distance_milestone", "player_milestone",
+        "tempo_change", "period_summary"
+      ]
+    },
+    "importance": { "type": "number", "minimum": 0, "maximum": 1, "description": "Normalised; drives the Producer ranker" },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "team_id": { "type": ["string", "null"] },
+        "player_id": { "type": ["string", "null"] }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Machine-readable numbers, e.g. {\"win_prob_before\":0.41,\"win_prob_after\":0.58}",
+      "additionalProperties": { "type": ["number", "string", "boolean"] }
+    },
+    "why": {
+      "type": "object",
+      "required": ["driver", "delta"],
+      "description": "The explainability payload: which signal moved and by how much",
+      "properties": {
+        "driver": { "type": "string", "enum": ["win_probability", "control_index", "ppda", "xt", "pass_difficulty", "speed", "distance", "tempo", "milestone"] },
+        "before": { "type": "number" },
+        "after": { "type": "number" },
+        "delta": { "type": "number" },
+        "window_s": { "type": "number", "description": "Look-back window the comparison used" }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "event_ids that support this fact; the verifier checks citations against these"
+    },
+    "audience_tags": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["analyst", "casual", "story", "stat"] }
+    }
+  }
+}

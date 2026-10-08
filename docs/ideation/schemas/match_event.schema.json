@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "match_event.schema.json",
+  "title": "MatchEvent",
+  "description": "One synthetic on-ball or off-ball event. Pitch coordinates are metres on a 105 x 68 pitch, origin at the attacking team's own bottom-left corner, x towards the opponent goal.",
+  "type": "object",
+  "required": ["event_id", "match_id", "seq", "t", "period", "type", "team_id"],
+  "properties": {
+    "event_id": { "type": "string", "description": "Globally unique, e.g. m001-000123" },
+    "match_id": { "type": "string" },
+    "seq": { "type": "integer", "minimum": 0, "description": "Monotonic sequence number within the match" },
+    "t": { "type": "number", "minimum": 0, "description": "Match clock in seconds since kick-off of period 1" },
+    "period": { "type": "integer", "enum": [1, 2, 3, 4, 5] },
+    "type": {
+      "type": "string",
+      "enum": ["kickoff", "pass", "carry", "shot", "tackle", "interception", "pressure", "turnover", "foul", "card", "substitution", "goal", "period_end"]
+    },
+    "team_id": { "type": "string" },
+    "player_id": { "type": ["string", "null"] },
+    "start": { "$ref": "#/$defs/point" },
+    "end": { "$ref": "#/$defs/point" },
+    "outcome": { "type": "string", "enum": ["success", "fail", "on_target", "off_target", "blocked", "goal", "yellow", "red"] },
+    "recipient_id": { "type": ["string", "null"], "description": "Pass recipient" },
+    "speed_kmh": { "type": "number", "description": "Ball speed for passes and shots" },
+    "under_pressure": { "type": "boolean" },
+    "pressure_count": { "type": "integer", "minimum": 0, "description": "Opponents within 5 m at release" },
+    "xg": { "type": "number", "minimum": 0, "maximum": 1, "description": "Shots only" },
+    "source": { "type": "string", "enum": ["sim", "cv_cleaned"], "default": "sim" },
+    "tags": { "type": "array", "items": { "type": "string" }, "description": "e.g. line_breaking, switch, through_ball, counter" }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 105 },
+        "y": { "type": "number", "minimum": 0, "maximum": 68 }
+      }
+    }
+  }
+}
