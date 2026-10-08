@@ -1,0 +1,42 @@
+[
+  {
+    "persona_id": "analyst-en",
+    "label": "Data-hungry analyst",
+    "mode": "analyst",
+    "lang": "en",
+    "favorite_team_id": null,
+    "focus_player_id": null,
+    "metric_focus": null,
+    "max_cues_per_min": 4
+  },
+  {
+    "persona_id": "casual-es-home",
+    "label": "Casual fan, Spanish, supports the home side",
+    "mode": "casual",
+    "lang": "es",
+    "favorite_team_id": "HOM",
+    "focus_player_id": null,
+    "metric_focus": null,
+    "max_cues_per_min": 1.5
+  },
+  {
+    "persona_id": "player-focus-ja",
+    "label": "Player-focus mode, Japanese, follows Riverside No. 6 E. Fujita",
+    "mode": "casual",
+    "lang": "ja",
+    "favorite_team_id": "AWY",
+    "focus_player_id": "AWY-6",
+    "metric_focus": null,
+    "max_cues_per_min": 2
+  },
+  {
+    "persona_id": "pass-nerd-ar",
+    "label": "Single-metric mode, Arabic, passing only",
+    "mode": "analyst",
+    "lang": "ar",
+    "favorite_team_id": null,
+    "focus_player_id": null,
+    "metric_focus": "pass_difficulty",
+    "max_cues_per_min": 3
+  }
+]

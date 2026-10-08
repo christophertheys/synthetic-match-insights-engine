@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "overlay.schema.json",
+  "title": "OverlayCue",
+  "description": "A timed, persona-specific graphics cue. Designed so a broadcast rendering partner can consume it without knowing anything about our analytics.",
+  "type": "object",
+  "required": ["cue_id", "persona_id", "t_start", "ttl", "slot", "template", "priority", "fact_ids", "data"],
+  "properties": {
+    "cue_id": { "type": "string" },
+    "persona_id": { "type": "string", "description": "Which viewing profile this cue was produced for" },
+    "t_start": { "type": "number", "description": "Match clock seconds to show the cue" },
+    "ttl": { "type": "number", "minimum": 1, "description": "Seconds on screen" },
+    "slot": { "type": "string", "enum": ["lower_third", "corner_badge", "side_panel", "full_takeover", "player_tag"] },
+    "template": {
+      "type": "string",
+      "enum": ["stat_card", "win_prob_bar", "momentum_strip", "player_tag", "pass_card", "speed_gauge", "headline", "recap_card"]
+    },
+    "priority": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "lang": { "type": "string", "description": "BCP-47 code, e.g. en, es, ar, ja" },
+    "fact_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "data": {
+      "type": "object",
+      "description": "Template-specific fields: numbers for graphics plus optional localized text",
+      "properties": {
+        "headline": { "type": "string" },
+        "why": { "type": "string", "description": "One-line localized explanation, always present on importance >= 0.3" },
+        "values": { "type": "object", "additionalProperties": { "type": ["number", "string"] } },
+        "anchor": {
+          "type": "object",
+          "description": "Optional pitch anchor for player_tag / pass_card",
+          "properties": { "x": { "type": "number" }, "y": { "type": "number" }, "player_id": { "type": "string" } }
+        }
+      }
+    },
+    "producer_reason": {
+      "type": "object",
+      "description": "Explainable ranking breakdown: why this cue won its slot",
+      "properties": {
+        "importance": { "type": "number" },
+        "novelty": { "type": "number" },
+        "affinity": { "type": "number" },
+        "mode_fit": { "type": "number" },
+        "score": { "type": "number" }
+      }
+    }
+  }
+}
