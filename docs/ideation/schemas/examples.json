@@ -1,0 +1,92 @@
+{
+  "match_event": {
+    "event_id": "m001-000812",
+    "match_id": "m001",
+    "seq": 812,
+    "t": 3842.6,
+    "period": 2,
+    "type": "pass",
+    "team_id": "AWY",
+    "player_id": "AWY-10",
+    "start": {
+      "x": 58.2,
+      "y": 30.1
+    },
+    "end": {
+      "x": 86.9,
+      "y": 22.4
+    },
+    "outcome": "success",
+    "recipient_id": "AWY-9",
+    "speed_kmh": 71.3,
+    "under_pressure": true,
+    "pressure_count": 2,
+    "source": "sim",
+    "tags": [
+      "line_breaking",
+      "through_ball"
+    ]
+  },
+  "insight_fact": {
+    "fact_id": "f-0147",
+    "match_id": "m001",
+    "t": 3846.0,
+    "kind": "win_prob_swing",
+    "importance": 0.71,
+    "subject": {
+      "team_id": "AWY",
+      "player_id": "AWY-9"
+    },
+    "metrics": {
+      "win_prob_before": 0.34,
+      "win_prob_after": 0.63,
+      "score_home": 1,
+      "score_away": 2
+    },
+    "why": {
+      "driver": "win_probability",
+      "before": 0.34,
+      "after": 0.63,
+      "delta": 0.29,
+      "window_s": 10
+    },
+    "evidence": [
+      "m001-000812",
+      "m001-000813"
+    ],
+    "audience_tags": [
+      "casual",
+      "story",
+      "analyst"
+    ]
+  },
+  "overlay_cue": {
+    "cue_id": "c-analyst-en-0147",
+    "persona_id": "analyst-en",
+    "t_start": 3846.0,
+    "ttl": 8,
+    "slot": "lower_third",
+    "template": "win_prob_bar",
+    "priority": 82,
+    "lang": "en",
+    "fact_ids": [
+      "f-0147"
+    ],
+    "data": {
+      "headline": "AWY 9 puts AWY 2-1 up from a line-breaking through ball",
+      "why": "Win probability AWY 34% -> 63% (+29 pts); pass difficulty 0.78",
+      "values": {
+        "win_prob_before": 0.34,
+        "win_prob_after": 0.63,
+        "pass_difficulty": 0.78
+      }
+    },
+    "producer_reason": {
+      "importance": 0.71,
+      "novelty": 1.0,
+      "affinity": 0.0,
+      "mode_fit": 0.9,
+      "score": 0.76
+    }
+  }
+}
